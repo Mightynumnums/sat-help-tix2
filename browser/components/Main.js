@@ -12,6 +12,7 @@ export default class Main extends Component {
         }
         this.getStudents = this.getStudents.bind(this)
         this.toggleForm = this.toggleForm.bind(this)
+        this.addStudent = this.addStudent.bind(this)
     }
 
     componentDidMount(){//state is always set initially (toms 1st law)
@@ -24,6 +25,14 @@ export default class Main extends Component {
         .then(res => this.setState({students: res.data}))
         .catch(console.error)
     }
+
+    addStudent(student) {
+        console.log('inside of addStudent ARE WE HEREEEE?')
+        axios.post('/student', student) //look at line 17 addStudentForm where student is defined as an object!!!
+        .then(res => res.data) //
+        .catch(console.error)
+    }
+
     toggleForm() {
         this.setState({ showForm: !this.state.showForm })
     }
@@ -36,11 +45,11 @@ export default class Main extends Component {
                     {
                         this.state.showForm
                         ? (
-                            <AddStudentForm />
+                            <AddStudentForm addStudent={this.addStudent} /> 
                         )
-                        : null //thisi toggles the button's state
+                        : null 
                     }
-                <Students students={this.state.students} />
+                <Students students={this.state.students} /> 
             </div>
         )
     }
