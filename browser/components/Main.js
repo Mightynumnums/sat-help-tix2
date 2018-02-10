@@ -29,7 +29,10 @@ export default class Main extends Component {
     addStudent(student) {
         console.log('inside of addStudent ARE WE HEREEEE?')
         axios.post('/student', student) //look at line 17 addStudentForm where student is defined as an object!!!
-        .then(res => res.data) //
+        .then(res => res.data)
+        .then(studentObj => this.setState({
+            students: [...this.state.students, studentObj]})
+        )
         .catch(console.error)
     }
 

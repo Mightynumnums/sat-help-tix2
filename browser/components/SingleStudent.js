@@ -4,14 +4,14 @@ const avgGrade = tests => {
     return (
         Math.round(
     tests.map(test => test.grade)
-    .reduce((x, y) => x + y) / tests.length
+    .reduce((x, y) => x + y, 0) / tests.length
     ))
 }
 
 const SingleStudent = ({fullName, tests}) =>
    ( <div>
         <h3>{fullName}</h3>
-        <h3>Average grade: {avgGrade(tests)}%</h3>
+   <h3>Average grade: {tests ? avgGrade(tests) : 0}%</h3>
         <div>
             <table>
                 <thead>
@@ -22,7 +22,7 @@ const SingleStudent = ({fullName, tests}) =>
                 </thead>
                 <tbody>
                 {
-                    tests.map((test) => {
+                   tests && tests.map((test) => {
                         return (
                             <tr key={test.id}>
                                 <td>{test.subject}</td>
