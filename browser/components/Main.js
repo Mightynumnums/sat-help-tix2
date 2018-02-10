@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import Students from './Students.js'
-import AddStudentsForm from './AddStudentForm';
+import AddStudentForm from './AddStudentForm';
 
 export default class Main extends Component {
     constructor(props){
@@ -11,7 +11,7 @@ export default class Main extends Component {
             showForm: false
         }
         this.getStudents = this.getStudents.bind(this)
-        //this.toggleForm = this.toggleForm
+        this.toggleForm = this.toggleForm.bind(this)
     }
 
     componentDidMount(){//state is always set initially (toms 1st law)
@@ -32,9 +32,15 @@ export default class Main extends Component {
         return (
             <div>
                 <h1>Happy Saturday!</h1>
-                <button onClick={() => this.toggleForm()}>Add Student</button>
+                <button onClick={ this.toggleForm }>Add Student</button>  
+                    {
+                        this.state.showForm
+                        ? (
+                            <AddStudentForm />
+                        )
+                        : null //thisi toggles the button's state
+                    }
                 <Students students={this.state.students} />
-                <AddStudentsForm />
             </div>
         )
     }

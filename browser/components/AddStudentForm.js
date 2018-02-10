@@ -1,32 +1,52 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-export deafult class AddStudentForm extends Component {
+export default class AddStudentForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstName: "",
+      lastName: "",
+      email: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            inputValue: ''
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
 
-        }
-    }
-}
-
-render() {
+  render() {
     return (
-        <form>
-           <label>
-               First Name: 
-               <input type="text" />
-           </label>
-           <label>
-               Last Name: 
-               <input type="text" />
-           </label>
-           <label>
-               Email: 
-               <input type="email" />
-           </label>    
-        </form>
+      <form>
+        <label>
+          First Name:
+          <input
+            type="text"
+            onChange={this.handleChange}
+            name="firstName"
+            value={this.state.firstName}
+          />
+        </label>
+        <label>
+          Last Name:
+          <input
+            type="text"
+            onChange={this.handleChange}
+            name="lastName"
+            value={this.state.lastName}
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            type="email"
+            onChange={this.handleChange}
+            name="email"
+            value={this.state.email}
+          />
+        </label>
         <button type="submit">Submit New Student</button>
-    )
+      </form>
+    );
+  }
 }
